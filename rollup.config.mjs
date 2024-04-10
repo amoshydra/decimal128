@@ -1,4 +1,5 @@
 // @ts-check
+import { getBabelOutputPlugin } from "@rollup/plugin-babel";
 import typescript from "@rollup/plugin-typescript";
 
 /**
@@ -20,6 +21,11 @@ const createConfig = (format) => {
             },
         ],
         plugins: [
+            getBabelOutputPlugin({
+                plugins: [
+                    "transform-jsbi-to-bigint",
+                ]
+            }),
             typescript({
                 tsconfig: "tsconfig.build.json",
                 outDir: `dist/${format}`,
